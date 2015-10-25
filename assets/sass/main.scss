@@ -206,7 +206,7 @@
 
 			#wrapper {
 				height: 100%;
-				overflow: hidden;
+				// overflow: hidden;
 				@include vendor('transition', 'filter 0.25s ease-in-out');
 
 				&.overlayed {

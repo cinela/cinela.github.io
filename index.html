@@ -14,86 +14,21 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
-
 		<div id="wrapper">
-
 			<div id="main">
 				<div id="reel">
-
 					<!-- Header Item -->
-
 						<div id="header" class="item" data-width="400">
 							<div class="inner">
 								<h1>Cinela</h1>
 								<p>Your source for indie movies</p>
 							</div>
 						</div>
-
-					<!-- Thumb Items -->
-            <!--
-
-						<article class="item thumb" data-width="282">
-							<h2>Dropbox one disabled</h2>
-                            <a href="players/player.html" data-poptrox="iframe" class="image"><img src="images/thumbs/01.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="384">
-							<h2>Dropbox two disabled</h2>
-							<a href="players/player2-1.html" data-poptrox="iframe" class="image"><img src="images/thumbs/02.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="274">
-							<h2>Locally hosted</h2>
-							<a href="players/local.html" data-poptrox="iframe" class="image"><img src="images/thumbs/03.jpg" alt=""></a>
-						</article>
-						<article class="item thumb" data-width="282">
-							<h2>Vimeo</h2>
-                            <a href="http://vimeo.com/22439234" data-poptrox="vimeo" class="image"><img id="vimeo-6271487" src="" /></a>
-						</article>
-
-						<article class="item thumb" data-width="476">
-							<h2>Youtube</h2>
-							<a href="http://youtu.be/HOdrdD1ub6Q" data-poptrox="youtube" class="image"><img src="http://img.youtube.com/vi/HOdrdD1ub6Q/mqdefault.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="476">
-							<h2>Youtube</h2>
-							<a href="http://youtu.be/D4KF8Mko7Z0" data-poptrox="youtube" class="image"><img src="http://img.youtube.com/vi/D4KF8Mko7Z0/mqdefault.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="232">
-							<h2>The Pursuit</h2>
-							<a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="352">
-							<h2>Boundless</h2>
-							<a href="images/fulls/07.jpg" class="image"><img src="images/thumbs/07.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="348">
-							<h2>The Spectators</h2>
-							<a href="images/fulls/08.jpg" class="image"><img src="images/thumbs/08.jpg" alt=""></a>
-						</article>
-
-						<article class="item thumb" data-width="476"><h2>Kingdom of the Wind</h2><a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="232"><h2>The Pursuit</h2><a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="352"><h2>Boundless</h2><a href="images/fulls/07.jpg" class="image"><img src="images/thumbs/07.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="348"><h2>The Spectators</h2><a href="images/fulls/08.jpg" class="image"><img src="images/thumbs/08.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="282"><h2>leh You really got me</h2><a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="384"><h2>Ad Infinitum</h2><a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="274"><h2>Different.</h2><a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt=""></a></article>
-						<article class="item thumb" data-width="282"><h2>Elysium</h2><a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt=""></a></article>
--->
-
 				</div>
 			</div>
-
 			<div id="footer">
 			</div>
-
 		</div>
-
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
@@ -103,73 +38,6 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
-            <script type="text/javascript">
-                var video_data = [
-                    {'source' : 'vimeo', 'video_id' : '2078991', 'title' : 'Notte Sento'},
-                    {'source' : 'youtube', 'video_id' : 'D4KF8Mko7Z0', 'title' : 'NY Times'},
-                    {'source' : 'vimeo', 'video_id' : '6271487', 'title' : 'Spheres'}
-                    ];
-                function vimeoLoadingThumb(id){    
-                    var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
-                      
-                    var id_img = "#vimeo-" + id;
-                    var script = document.createElement( 'script' );
-                    script.type = 'text/javascript';
-                    script.src = url;
-
-                    $(id_img).before(script);
-                }
-
-                function showThumb(data){
-                    var id_img = "#vimeo-" + data[0].id;
-                    $(id_img).attr('src',data[0].thumbnail_medium);
-                }
-
-                $(function() {
-                    var vimeo_video_data = video_data.filter(function(el) {
-                        return el.source === 'vimeo'
-                    });
-                    vimeo_video_data.map(function(el) {
-                        vimeoLoadingThumb(parseInt(el.video_id))
-                    });
-                });
-
-                var items = Array("476", "232", "352", "348", "282", "384", "274", "282");
-                function addVimeoToReel(id, title) {
-                    var size = items[Math.floor(Math.random()*items.length)];
-                    $('<article/>', {'class': 'item thumb', 
-                                     'data-width' : size}).append(
-                        $('<h2/>', {text : title}), 
-                            $('<a/>', {'href': 'http://vimeo.com/' + id, 
-                                'data-poptrox' : 'vimeo', 
-                                'class' : 'image'}).append(
-                            $('<img/>', 
-                                {'id' : 'vimeo-' + id})
-                        )
-                    ).appendTo('#reel');
-                };
-                function addYoutubeToReel(yId, title) {
-                    var size = items[Math.floor(Math.random()*items.length)];
-                    $('<article/>', {'class': 'item thumb', 
-                                     'data-width' : size}).append(
-                        $('<h2/>', {text : title}), 
-                            $('<a/>', {'href': 'http://youtu.be/' + yId, 
-                                'data-poptrox' : 'youtube', 
-                                'class' : 'image'}).append(
-                            $('<img/>', 
-                                {'src' : 'http://img.youtube.com/vi/' + yId + '/mqdefault.jpg'})
-                        )
-                    ).appendTo('#reel');
-                };
-                video_data.map(function(el) {
-                    if (el.source === 'youtube') {
-                        addYoutubeToReel(el.video_id, el.title);
-                    } else if (el.source == 'vimeo') {
-                        addVimeoToReel(el.video_id, el.title);
-                    }
-                });
-
-
-            </script>
+            <script src="assets/js/videos.js"></script>
 	</body>
 </html>

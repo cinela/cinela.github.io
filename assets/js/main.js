@@ -27,7 +27,7 @@ var parallelism = (function($) { var _ = {
 				// Desktop only.
 
 					// If true, reel will be vertically centered.
-						centerVertically: true,
+						centerVertically: false,
 
 					// Delay (in ms) before showing the reel.
 						introDelay: 600,
@@ -140,6 +140,7 @@ var parallelism = (function($) { var _ = {
 						// Reduce row count if we have more than we need.
 							while ( rows > _.settings.minRows && (itemsWidth / rows) < windowWidth )
 								rows--;
+                            rows = 5;
 
 						// Get average row width.
 							rowWidth = Math.ceil( (itemsWidth / rows) * 1.1 );
@@ -238,7 +239,7 @@ var parallelism = (function($) { var _ = {
 								_.objects.window._parallelism_update();
 
 						// Update scroll zones.
-							$SZ._parallelism_update();
+						//	$SZ._parallelism_update();
 
 					});
 
@@ -364,124 +365,124 @@ var parallelism = (function($) { var _ = {
 				// Scrolling.
 
 					// Scroll Wheel.
-
-						if (_.IEVersion < 9)
-							_.objects.main.css('overflow-x', 'scroll');
-						else {
-
-							var scrollHandler = function(e) {
-								var	delta = (e.detail ? e.detail * -10 : e.wheelDelta) * _.settings.scrollFactor;
-								_.objects.main.scrollLeft( _.objects.main.scrollLeft() - delta );
-								$SZ._parallelism_update();
-								e.preventDefault();
-								e.stopPropagation();
-							};
-
-							var st;
-
-							if (_.settings.scrollWheelTarget == 'reel')
-								st = _.objects.main[0];
-							else
-								st = _.objects.window[0];
-
-							st.addEventListener('DOMMouseScroll', scrollHandler, false);
-							st.addEventListener('mousewheel', scrollHandler, false);
-
-						}
-
-						if (_.settings.resetScroll)
-							window.setTimeout(function() {
-								_.objects.main.scrollLeft(0);
-							}, 0);
-
-					// Scroll Zones.
-						if (!_.isTouch && _.settings.useScrollZones) {
-
-							_.objects.body.append('<div class="SZRight" style="right: 0;" />');
-							_.objects.body.append('<div class="SZLeft" style="left: 0;" />');
-
-							$SZLeft = _.objects.body.children('.SZLeft');
-							$SZRight = _.objects.body.children('.SZRight');
-							$SZ = $SZLeft.add($SZRight);
-
-							$SZ
-								.css('position', 'fixed')
-								.css('width', _.settings.scrollZoneWidth)
-								.css('height', 100)
-								.css('z-index', 100)
-								.css('background', 'rgba(255,255,255,0)') // Required due to a weird IE bug (affects <=10)
-								.css('top', 0);
-
-							$SZ._parallelism_update = function() {
-
-								if (_.objects.main.scrollLeft() == 0)
-									$SZLeft.hide();
-								else
-									$SZLeft.show();
-
-								if (_.objects.main.scrollLeft() + $(window).width() >= _.objects.reel.outerWidth())
-									$SZRight.hide();
-								else
-									$SZRight.show();
-
-							};
-
-							$SZRight.bind('mouseenter', function(e) {
-
-								SZIntervalId = window.setInterval(function() {
-									_.objects.main.scrollLeft( _.objects.main.scrollLeft() + (_.settings.scrollZoneAmount * _.settings.scrollFactor) );
-									$SZ._parallelism_update();
-								}, _.settings.scrollZoneDelay);
-								return false;
-
-							});
-
-							$SZLeft.bind('mouseenter', function(e) {
-
-								SZIntervalId = window.setInterval(function() {
-									_.objects.main.scrollLeft( _.objects.main.scrollLeft() - (_.settings.scrollZoneAmount * _.settings.scrollFactor) );
-									$SZ._parallelism_update();
-								}, _.settings.scrollZoneDelay);
-								return false;
-
-							});
-
-							$SZ.bind('mouseleave', function(e) {
-								window.clearInterval(SZIntervalId);
-							});
-
-						}
-						else
-							$SZ._parallelism_update = function() {};
-
-					// Scroll Keys.
-						if (_.settings.useScrollKeys) {
-
-							_.objects.window.keydown(function(e) {
-								if ($('.poptrox-popup').is(':visible'))
-									return;
-
-								switch (e.keyCode)
-								{
-									case 39:
-										window.clearInterval(SZIntervalId);
-										_.objects.main.scrollLeft( _.objects.main.scrollLeft() + (_.settings.scrollKeyAmount * _.settings.scrollFactor) );
-										$SZ._parallelism_update();
-										return false;
-
-									case 37:
-										window.clearInterval(SZIntervalId);
-										_.objects.main.scrollLeft( _.objects.main.scrollLeft() - (_.settings.scrollKeyAmount * _.settings.scrollFactor) );
-										$SZ._parallelism_update();
-										return false;
-
-									default:
-										break;
-								}
-							});
-
-						}
-
+//
+//						if (_.IEVersion < 9)
+//							_.objects.main.css('overflow-x', 'scroll');
+//						else {
+//
+//							var scrollHandler = function(e) {
+//								var	delta = (e.detail ? e.detail * -10 : e.wheelDelta) * _.settings.scrollFactor;
+//								_.objects.main.scrollLeft( _.objects.main.scrollLeft() - delta );
+//								$SZ._parallelism_update();
+//								e.preventDefault();
+//								e.stopPropagation();
+//							};
+//
+//							var st;
+//
+//							if (_.settings.scrollWheelTarget == 'reel')
+//								st = _.objects.main[0];
+//							else
+//								st = _.objects.window[0];
+//
+//							st.addEventListener('DOMMouseScroll', scrollHandler, false);
+//							st.addEventListener('mousewheel', scrollHandler, false);
+//
+//						}
+//
+//						if (_.settings.resetScroll)
+//							window.setTimeout(function() {
+//								_.objects.main.scrollLeft(0);
+//							}, 0);
+//
+//					// Scroll Zones.
+//						if (!_.isTouch && _.settings.useScrollZones) {
+//
+//							_.objects.body.append('<div class="SZRight" style="right: 0;" />');
+//							_.objects.body.append('<div class="SZLeft" style="left: 0;" />');
+//
+//							$SZLeft = _.objects.body.children('.SZLeft');
+//							$SZRight = _.objects.body.children('.SZRight');
+//							$SZ = $SZLeft.add($SZRight);
+//
+//							$SZ
+//								.css('position', 'fixed')
+//								.css('width', _.settings.scrollZoneWidth)
+//								.css('height', 100)
+//								.css('z-index', 100)
+//								.css('background', 'rgba(255,255,255,0)') // Required due to a weird IE bug (affects <=10)
+//								.css('top', 0);
+//
+//							$SZ._parallelism_update = function() {
+//
+//								if (_.objects.main.scrollLeft() == 0)
+//									$SZLeft.hide();
+//								else
+//									$SZLeft.show();
+//
+//								if (_.objects.main.scrollLeft() + $(window).width() >= _.objects.reel.outerWidth())
+//									$SZRight.hide();
+//								else
+//									$SZRight.show();
+//
+//							};
+//
+//							$SZRight.bind('mouseenter', function(e) {
+//
+//								SZIntervalId = window.setInterval(function() {
+//									_.objects.main.scrollLeft( _.objects.main.scrollLeft() + (_.settings.scrollZoneAmount * _.settings.scrollFactor) );
+//									$SZ._parallelism_update();
+//								}, _.settings.scrollZoneDelay);
+//								return false;
+//
+//							});
+//
+//							$SZLeft.bind('mouseenter', function(e) {
+//
+//								SZIntervalId = window.setInterval(function() {
+//									_.objects.main.scrollLeft( _.objects.main.scrollLeft() - (_.settings.scrollZoneAmount * _.settings.scrollFactor) );
+//									$SZ._parallelism_update();
+//								}, _.settings.scrollZoneDelay);
+//								return false;
+//
+//							});
+//
+//							$SZ.bind('mouseleave', function(e) {
+//								window.clearInterval(SZIntervalId);
+//							});
+//
+//						}
+//						else
+//							$SZ._parallelism_update = function() {};
+//
+//					// Scroll Keys.
+//						if (_.settings.useScrollKeys) {
+//
+//							_.objects.window.keydown(function(e) {
+//								if ($('.poptrox-popup').is(':visible'))
+//									return;
+//
+//								switch (e.keyCode)
+//								{
+//									case 39:
+//										window.clearInterval(SZIntervalId);
+//										_.objects.main.scrollLeft( _.objects.main.scrollLeft() + (_.settings.scrollKeyAmount * _.settings.scrollFactor) );
+//										$SZ._parallelism_update();
+//										return false;
+//
+//									case 37:
+//										window.clearInterval(SZIntervalId);
+//										_.objects.main.scrollLeft( _.objects.main.scrollLeft() - (_.settings.scrollKeyAmount * _.settings.scrollFactor) );
+//										$SZ._parallelism_update();
+//										return false;
+//
+//									default:
+//										break;
+//								}
+//							});
+//
+//						}
+//
 				// Poptrox.
 					_.objects.reel.poptrox({
 						onPopupClose: (_.settings.useBlurFilter ? (function() { _.objects.wrapper.removeClass('overlayed'); }) : null),
